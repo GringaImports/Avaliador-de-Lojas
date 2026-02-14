@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lojas - Avaliador Lojas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-dot"></div>
+        <div>
+          <div class="brand-title">Avaliador de Lojas</div>
+          <div class="brand-sub">Auditoria & Ranking</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="active" href="stores.html">🏪 Lojas <small>Cadastro e lista</small></a>
+        <a href="ranking.html">🏆 Ranking Público</a>
+        <a href="login.html">🔐 Conta <small>Login</small></a>
+      </nav>
+
+      <div style="margin-top:14px" class="pill">
+        Logado: <span id="userEmail">...</span>
+      </div>
+
+      <div style="margin-top:10px;">
+        <button id="btnSair" class="btn-danger" style="width:100%;">Sair</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1 class="h1">Lojas</h1>
+          <div class="subtitle">Cadastre lojas, filtre, ordene, exporte CSV e veja insights.</div>
+        </div>
+
+        <div class="actions">
+          <span class="pill">Total: <span id="storesCount">0</span></span>
+          <span class="pill">Reviews: <span id="totalReviews">0</span></span>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <section class="kpi-grid" style="margin-bottom:14px;">
+        <div class="kpi card">
+          <div class="muted">Nota média (ponderada)</div>
+          <div class="kpi-value" id="kpiAvg">0.00</div>
+        </div>
+        <div class="kpi card">
+          <div class="muted">Top cidade</div>
+          <div class="kpi-value" id="kpiTopCity">-</div>
+        </div>
+        <div class="kpi card">
+          <div class="muted">Aprovadas</div>
+          <div class="kpi-value" id="kpiApproved">0</div>
+        </div>
+        <div class="kpi card">
+          <div class="muted">Críticas</div>
+          <div class="kpi-value" id="kpiCritical">0</div>
+        </div>
+      </section>
+
+      <div class="grid">
+        <!-- Cadastro -->
+        <section class="card">
+          <h3>Cadastrar nova loja</h3>
+
+          <div class="row">
+            <div>
+              <label>Nome da loja</label>
+              <input id="storeName" placeholder="Ex: Loja 01" />
+            </div>
+            <div>
+              <label>Cidade</label>
+              <input id="storeCity" placeholder="Ex: Guaramirim" />
+            </div>
+          </div>
+
+          <label>Categoria</label>
+          <input id="storeCategory" placeholder="Ex: Varejo, Mercado, Roupas..." />
+
+          <div style="margin-top:10px">
+            <button id="btnCriar" class="btn-primary">Criar loja</button>
+            <p id="msg" class="muted"></p>
+          </div>
+
+          <hr/>
+
+          <h3 style="margin:0 0 10px 0;">Insights</h3>
+          <div class="row">
+            <div class="card" style="margin:0; background:rgba(255,255,255,.03); box-shadow:none;">
+              <div class="muted">Top cidades (média ponderada)</div>
+              <div id="cityInsights" class="mini-list"></div>
+            </div>
+            <div class="card" style="margin:0; background:rgba(255,255,255,.03); box-shadow:none;">
+              <div class="muted">Top categorias (média ponderada)</div>
+              <div id="catInsights" class="mini-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Ranking + filtros + lista -->
+        <section class="card">
+          <div class="topbar" style="margin-bottom:12px;">
+            <div>
+              <h3 style="margin:0;">Ranking & Lista</h3>
+              <div class="muted">Top 5 + filtros + ordenação + CSV</div>
+            </div>
+          </div>
+
+          <!-- Filtros -->
+          <div class="row">
+            <div>
+              <label>Buscar</label>
+              <input id="searchInput" placeholder="Digite o nome da loja..." />
+            </div>
+            <div>
+              <label>Cidade</label>
+              <select id="cityFilter">
+                <option value="">Todas</option>
+              </select>
+            </div>
+            <div>
+              <label>Categoria</label>
+              <select id="categoryFilter">
+                <option value="">Todas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:8px;">
+            <button id="btnClearFilters" class="btn-ghost">Limpar filtros</button>
+            <button id="btnExportCSV" class="btn-ghost">Exportar CSV</button>
+            <span class="pill">Mostrando: <span id="showingCount">0</span></span>
+          </div>
+
+          <hr/>
+
+          <!-- Ordenação por coluna -->
+          <div class="table-head">
+            <button class="th" id="sortName">Nome</button>
+            <button class="th" id="sortAvg">Nota</button>
+            <button class="th" id="sortCount">Reviews</button>
+            <span class="muted" id="sortLabel"></span>
+          </div>
+
+          <hr/>
+
+          <!-- Top 5 -->
+          <h3 style="margin:0 0 10px 0;">🏆 Top 5</h3>
+          <div id="top5List" class="list"></div>
+
+          <hr/>
+
+          <!-- Lista -->
+          <h3 style="margin:0 0 10px 0;">Todas as lojas</h3>
+          <div id="storesList" class="list"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="stores.js"></script>
+</body>
+</html>

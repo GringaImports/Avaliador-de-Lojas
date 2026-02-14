@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ranking Público - Avaliador Lojas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-dot"></div>
+        <div>
+          <div class="brand-title">Ranking Público</div>
+          <div class="brand-sub">Sem login • Consulta</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="stores.html">🏪 Painel <small>Requer login</small></a>
+        <a class="active" href="ranking.html">🏆 Ranking <small>Público</small></a>
+      </nav>
+
+      <div class="pill" style="margin-top:14px;">
+        Dica: use filtros e exporte CSV
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1 class="h1">Ranking de Lojas</h1>
+          <div class="subtitle">Ordenado por nota (e volume), com status inteligente.</div>
+        </div>
+
+        <div class="actions">
+          <button id="btnExportCSV" class="btn-ghost">Exportar CSV</button>
+          <span class="pill">Mostrando: <span id="showingCount">0</span></span>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="row">
+          <div>
+            <label>Buscar</label>
+            <input id="searchInput" placeholder="Digite o nome da loja..." />
+          </div>
+          <div>
+            <label>Cidade</label>
+            <select id="cityFilter">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div>
+            <label>Categoria</label>
+            <select id="categoryFilter">
+              <option value="">Todas</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:8px;">
+          <button id="btnClearFilters" class="btn-ghost">Limpar filtros</button>
+          <span class="muted" id="sortLabel">Ordenado por ranking</span>
+        </div>
+
+        <hr/>
+
+        <div id="rankingList" class="list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="ranking.js"></script>
+</body>
+</html>

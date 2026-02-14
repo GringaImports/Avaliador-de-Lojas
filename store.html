@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Avaliar Loja</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-dot"></div>
+        <div>
+          <div class="brand-title">Avaliador Lojas</div>
+          <div class="brand-sub">Checklist 20 itens</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="stores.html">🏪 Lojas <small>Voltar pra lista</small></a>
+        <a class="active" href="#">✅ Avaliação <small>Formulário</small></a>
+      </nav>
+
+      <div style="margin-top:14px" class="pill">
+        Logado: <span id="userEmail">...</span>
+      </div>
+
+      <div style="margin-top:10px;">
+        <button id="btnSair" class="btn-danger" style="width:100%;">Sair</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1 class="h1" id="storeTitle">Loja</h1>
+          <div class="subtitle" id="storeMeta"></div>
+        </div>
+
+        <div class="actions">
+          <a class="pill" href="stores.html">← Voltar</a>
+        </div>
+      </div>
+
+      <div class="grid">
+        <section class="card">
+          <h3>Avaliação (20 perguntas)</h3>
+          <p class="muted">Escolha uma nota de 1 a 5 em cada pergunta. A média é calculada automaticamente.</p>
+
+          <div id="questions"></div>
+
+          <div class="row" style="margin-top:12px">
+            <div class="card" style="margin:0; background: rgba(255,255,255,.03); box-shadow:none;">
+              <div class="muted">Média da sua avaliação</div>
+              <div style="font-size:32px; font-weight:800;" id="myAvg">0.00</div>
+            </div>
+            <div class="card" style="margin:0; background: rgba(255,255,255,.03); box-shadow:none;">
+              <div class="muted">Status</div>
+              <div id="status" style="font-weight:800;">Preencha as notas</div>
+            </div>
+          </div>
+
+          <label>Comentário (opcional)</label>
+          <textarea id="comment" placeholder="Ex: equipe atenciosa, mas sinalização de promoções pode melhorar..."></textarea>
+
+          <button id="btnSalvar" class="btn-primary">Salvar avaliação</button>
+          <p id="msg" class="muted"></p>
+        </section>
+
+        <section class="card">
+          <h3>Denúncia (moderação)</h3>
+          <p class="muted">Use apenas para abuso: spam, ofensa, fake review.</p>
+
+          <label>Motivo</label>
+          <select id="reportReason">
+            <option value="">Selecione um motivo</option>
+            <option value="Linguagem ofensiva">Linguagem ofensiva</option>
+            <option value="Fake review">Fake review</option>
+            <option value="Spam">Spam</option>
+            <option value="Informação falsa">Informação falsa</option>
+          </select>
+
+          <button id="btnReport" class="btn-ghost">Enviar denúncia</button>
+          <p class="muted">No MVP, denuncia a avaliação do usuário logado nesta loja.</p>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="store.js"></script>
+</body>
+</html>

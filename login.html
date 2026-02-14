@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login • Avaliador Lojas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="auth-body">
+  <div class="auth-bg">
+    <div class="auth-glow auth-glow-1"></div>
+    <div class="auth-glow auth-glow-2"></div>
+    <div class="auth-grid"></div>
+  </div>
+
+  <main class="auth-wrap">
+    <section class="auth-card">
+      <header class="auth-header">
+        <div class="auth-brand">
+          <div class="auth-logo"></div>
+          <div>
+            <div class="auth-title">Coordenação de Lojas</div>
+            <div class="auth-sub">Sistema da © Gringa Top 10/99</div>
+          </div>
+        </div>
+
+        <div class="auth-chip">🔒 Acesso seguro</div>
+      </header>
+
+      <div class="auth-content">
+        <h1 class="auth-h1">Entrar</h1>
+        <p class="auth-p">
+          Acesse para cadastrar lojas, avaliar e acompanhar rankings.
+        </p>
+
+        <form id="formLogin" class="auth-form">
+          <label class="auth-label">
+            Email
+            <div class="auth-input">
+              <span class="auth-icon">✉️</span>
+              <input id="email" type="email" placeholder="seuemail@exemplo.com" autocomplete="email" required />
+            </div>
+          </label>
+
+          <label class="auth-label">
+            Senha
+            <div class="auth-input">
+              <span class="auth-icon">🔑</span>
+              <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" required />
+              <button id="togglePass" type="button" class="auth-eye" aria-label="Mostrar/ocultar senha">👁️</button>
+            </div>
+          </label>
+
+          <div class="auth-row">
+            <label class="auth-check">
+              <input id="remember" type="checkbox" />
+              <span>Lembrar</span>
+            </label>
+          </div>
+
+          <button id="btnEntrar" class="auth-btn auth-btn-primary" type="submit">
+            Entrar
+          </button>
+
+          <div class="auth-divider">
+            <span>ou</span>
+          </div>
+
+          <button id="btnCadastrar" class="auth-btn auth-btn-ghost" type="button">
+            Criar conta
+          </button>
+
+          <p id="msg" class="auth-msg"></p>
+        </form>
+      </div>
+
+      <footer class="auth-footer">
+        <div class="auth-mini">
+          <span class="dot"></span>
+          Dica: use um email válido e senha com 6+ caracteres.
+        </div>
+        <div class="auth-mini">
+          <span class="dot"></span>
+          MVP: login por Email/Senha (Firebase Auth).
+        </div>
+      </footer>
+    </section>
+
+    <aside class="auth-side">
+      <div class="auth-side-card">
+        <h2>O que você ganha aqui</h2>
+        <ul>
+          <li>✅ Avaliação estruturada (20 perguntas)</li>
+          <li>✅ Nota automática + status inteligente</li>
+          <li>✅ Ranking e relatórios por cidade/categoria</li>
+          <li>✅ Exportação CSV</li>
+        </ul>
+        <div class="auth-side-badges">
+          <span class="badge-soft">Ranking's</span>
+          <span class="badge-soft">Avaliações</span>
+          <span class="badge-soft">Melhorias</span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script type="module" src="login.js"></script>
+</body>
+</html>
