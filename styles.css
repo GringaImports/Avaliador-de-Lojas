@@ -391,11 +391,11 @@ button:disabled{ opacity: .55; cursor: not-allowed; }
 }
 .auth-glow-1{
   left:-180px; top:-220px;
-  background: radial-gradient(circle at 30% 30%, #6d5efc 0%, transparent 60%);
+  background: radial-gradient(circle at 30% 30%, #fed002 0%, transparent 60%);
 }
 .auth-glow-2{
   right:-220px; bottom:-240px;
-  background: radial-gradient(circle at 30% 30%, #22c55e 0%, transparent 60%);
+  background: radial-gradient(circle at 30% 30%, #2b6db4 0%, transparent 60%);
 }
 
 .auth-wrap{
@@ -438,7 +438,7 @@ button:disabled{ opacity: .55; cursor: not-allowed; }
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(109,94,252,.95), rgba(34,197,94,.85));
+  background: linear-gradient(135deg, rgba(254, 208, 2), rgba(43, 109, 180));
   box-shadow: 0 12px 40px rgba(109,94,252,.25);
 }
 
