@@ -13,13 +13,13 @@
         <div class="logo-dot"></div>
         <div>
           <div class="brand-title">Avaliador Lojas</div>
-          <div class="brand-sub">Checklist 20 itens</div>
+          <div class="brand-sub">Checklist com evidências</div>
         </div>
       </div>
 
       <nav class="nav">
         <a href="stores.html">🏪 Lojas <small>Voltar pra lista</small></a>
-        <a class="active" href="#">✅ Avaliação <small>Formulário</small></a>
+        <a class="active" href="#">✅ Avaliação <small>Checklist</small></a>
       </nav>
 
       <div style="margin-top:14px" class="pill">
@@ -45,32 +45,63 @@
 
       <div class="grid">
         <section class="card">
-          <h3>Avaliação (20 perguntas)</h3>
-          <p class="muted">Escolha uma nota de 1 a 5 em cada pergunta. A média é calculada automaticamente.</p>
+          <h3>Checklist de Avaliação</h3>
+          <p class="muted">
+            Responda <b>Sim</b> ou <b>Não</b>, adicione observações e anexe até 3 imagens por pergunta.
+          </p>
 
           <div id="questions"></div>
 
           <div class="row" style="margin-top:12px">
             <div class="card" style="margin:0; background: rgba(255,255,255,.03); box-shadow:none;">
-              <div class="muted">Média da sua avaliação</div>
-              <div style="font-size:32px; font-weight:800;" id="myAvg">0.00</div>
+              <div class="muted">Perguntas respondidas</div>
+              <div style="font-size:32px; font-weight:800;" id="myAvg">0/20</div>
             </div>
+
             <div class="card" style="margin:0; background: rgba(255,255,255,.03); box-shadow:none;">
               <div class="muted">Status</div>
-              <div id="status" style="font-weight:800;">Preencha as notas</div>
+              <div id="status" style="font-weight:800;">Preencha as respostas</div>
             </div>
           </div>
 
-          <label>Comentário (opcional)</label>
-          <textarea id="comment" placeholder="Ex: equipe atenciosa, mas sinalização de promoções pode melhorar..."></textarea>
+          <label>Observação geral (opcional)</label>
+          <textarea id="comment" placeholder="Ex: loja organizada, equipe engajada, alguns pontos específicos precisam de ajuste..."></textarea>
 
-          <button id="btnSalvar" class="btn-primary">Salvar avaliação</button>
-          <p id="msg" class="muted"></p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+            <button id="btnSalvar" class="btn-primary">Salvar checklist e gerar PDF</button>
+            <button id="btnBaixarPdf" class="btn-ghost" type="button" style="display:none;">Baixar último PDF</button>
+          </div>
+
+          <p id="msg" class="muted" style="margin-top:10px;"></p>
         </section>
 
         <section class="card">
-          <h3>Denúncia (moderação)</h3>
-          <p class="muted">Use apenas para abuso: spam, ofensa, fake review.</p>
+          <h3>Informações do Relatório</h3>
+          <p class="muted">
+            Ao salvar, o sistema irá:
+          </p>
+
+          <div class="list" style="margin-top:10px;">
+            <div class="item">
+              <b>1. Registrar respostas</b>
+              <div class="muted">Salvar Sim/Não, observações e imagens por pergunta.</div>
+            </div>
+
+            <div class="item">
+              <b>2. Gerar relatório</b>
+              <div class="muted">Montar automaticamente um relatório estruturado da avaliação.</div>
+            </div>
+
+            <div class="item">
+              <b>3. Criar PDF</b>
+              <div class="muted">Gerar um PDF organizado para download imediato no navegador.</div>
+            </div>
+          </div>
+
+          <hr/>
+
+          <h3 style="margin-top:0;">Denúncia (moderação)</h3>
+          <p class="muted">Use apenas para abuso: spam, ofensa ou informação falsa.</p>
 
           <label>Motivo</label>
           <select id="reportReason">
@@ -81,13 +112,14 @@
             <option value="Informação falsa">Informação falsa</option>
           </select>
 
-          <button id="btnReport" class="btn-ghost">Enviar denúncia</button>
+          <button id="btnReport" class="btn-ghost" style="margin-top:10px;">Enviar denúncia</button>
           <p class="muted">No MVP, denuncia a avaliação do usuário logado nesta loja.</p>
         </section>
       </div>
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
   <script type="module" src="store.js"></script>
 </body>
 </html>
