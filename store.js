@@ -139,12 +139,28 @@ function noCount() {
 }
 
 function compliancePct() {
-  return (yesCount() / QUESTIONS.length) * 100;
+  return Number(((yesCount() / QUESTIONS.length) * 100).toFixed(2));
 }
 
-// Mantém compatibilidade com o restante do sistema (escala 0 a 5)
+/* =========================
+   NOTA DE 1 A 5
+   mínimo = 1.00
+   máximo = 5.00
+
+   Fórmula:
+   1 + ((sim / total) * 4)
+
+   Exemplos:
+   0 sim  = 1.00
+   10 sim = 3.00
+   20 sim = 5.00
+   ========================= */
+
 function ratingEquivalent() {
-  return (yesCount() / QUESTIONS.length) * 5;
+  const sim = yesCount();
+  const total = QUESTIONS.length;
+  const nota = 1 + ((sim / total) * 4);
+  return Number(nota.toFixed(2));
 }
 
 function criticalFlagsFromAnswers() {
@@ -164,6 +180,7 @@ function criticalFlagsFromAnswers() {
 
 function statusFromCurrentAnswers() {
   const filled = answeredCount();
+
   if (filled < QUESTIONS.length) {
     return {
       label: `Faltam ${QUESTIONS.length - filled} perguntas`,
@@ -172,6 +189,7 @@ function statusFromCurrentAnswers() {
   }
 
   const crit = criticalFlagsFromAnswers();
+
   if (crit.hasCriticalFail) {
     return {
       label: `🚨 Crítico (falha nas perguntas: ${crit.failedCritical.join(", ")})`,
@@ -179,9 +197,10 @@ function statusFromCurrentAnswers() {
     };
   }
 
-  const no = noCount();
-  if (no === 0) return { label: "✅ Tudo conforme", tone: "ok" };
-  if (no <= 5) return { label: "⚠️ Pontos de atenção", tone: "warn" };
+  const note = ratingEquivalent();
+
+  if (note >= 4.2) return { label: "✅ Tudo conforme", tone: "ok" };
+  if (note >= 3.2) return { label: "⚠️ Pontos de atenção", tone: "warn" };
   return { label: "🚨 Necessita ação", tone: "bad" };
 }
 
@@ -456,7 +475,8 @@ async function generatePDF(snapshot) {
   writeLabelValue("Usuário", currentUser?.email || "-");
   writeLabelValue("Data/Hora", formatDateBR());
   writeLabelValue("Respondidas", `${answeredCount()}/${QUESTIONS.length}`);
-  writeLabelValue("Conformidade", `${compliancePct().toFixed(1)}%`);
+  writeLabelValue("Nota final", `${ratingEquivalent().toFixed(2)} / 5`);
+  writeLabelValue("Conformidade", `${compliancePct().toFixed(2)}%`);
   writeLabelValue("Status", statusFromCurrentAnswers().label);
 
   if (snapshot.generalComment) {
@@ -594,7 +614,6 @@ async function loadMyReview(uid) {
 
 /* =========================
    AGREGADOS DA LOJA
-   Mantém compatibilidade com stores.js e ranking.js
    ========================= */
 
 async function recomputeStoreAggregate() {
@@ -617,7 +636,7 @@ async function recomputeStoreAggregate() {
   const criticalCount = reviews.reduce((acc, r) => acc + (r.criticalFail ? 1 : 0), 0);
 
   await updateDoc(doc(db, "stores", storeId), {
-    ratingAvg: avg,
+    ratingAvg: Number(avg.toFixed(2)),
     ratingCount: reviews.length,
     criticalCount,
     updatedAt: serverTimestamp()
@@ -710,7 +729,6 @@ btnSalvar.addEventListener("click", async () => {
 
 /* =========================
    BAIXAR ÚLTIMO PDF
-   Regenera com os dados carregados
    ========================= */
 
 btnBaixarPdf?.addEventListener("click", async () => {
